@@ -8,10 +8,19 @@ typedef struct LNode
     struct LNode* next;
 } LNode, *LinkList;//LinkList = head node
 
+Status ListInsert(LinkList& L, int i, ElemType e);
+Status ListDelete(LinkList& L, int i, ElemType& e);
+Status GetElem(LinkList L, int i, ElemType& e);
+Status CreateList/*Head Insert*/(LinkList& L, int n);
 
 int main()
 {
-    return 0;
+	LinkList list1;
+	cout<<ListInsert(list1,1,1.0/7); 
+	ElemType e;
+	cout<<GetElem(list1,1,e);
+    cout<<e;
+	return 0;
 }
 
 Status ListInsert(LinkList& L, int i, ElemType e) {
