@@ -1,7 +1,3 @@
-#include<iostream>
-#include<cstdio>
-#include<cstdlib>
-
 #define TRUE        1
 #define FALSE       0
 #define OK          1

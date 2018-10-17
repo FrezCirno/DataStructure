@@ -52,7 +52,7 @@ Status InsertElem(SLinkList& Space, int list, int i, ElemType e) {
     int p = list;
     int j = 0;
     while (p&&j < i - 1) { p = Space[p].cur; ++j; }
-    if (!p || j > i - 1)return ERROR;
+    if (!p||j > i - 1)return ERROR;
     int n = Malloc(Space);
     Space[n].data = e;
     Space[n].cur = Space[p].cur;
