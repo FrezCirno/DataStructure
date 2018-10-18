@@ -8,81 +8,81 @@ typedef struct {
 	int  cur;
 } Component[MAXSIZE];
 typedef int SLinkList;
+/*
+space[0]--space[1]--...--space[MAXSIZE-1]
 
-Status InsertElem(SLinkList&, int, int, ElemType);
-int LocateElem(SLinkList, ElemType, bool (*)(ElemType, ElemType));
-Status InitSpace(SLinkList&);
-int Malloc(SLinkList&);
-void Free(SLinkList&, int);
-Status ListTraverse(SLinkList, int, int(*)(ElemType));
-int InitList(SLinkList *H);
-Status ClearList(SLinkList H);
-void DestroyList(SLinkList *H);
-Status ListEmpty(SLinkList H);
-int ListLength(SLinkList H);
-Status GetElem(SLinkList H, int i, ElemType *e);
-int LocateElem(SLinkList H, ElemType e);
-Status PriorElem(SLinkList H, ElemType cur_e, ElemType *pre_e);
-Status NextElem(SLinkList H, ElemType cur_e, ElemType *next_e);
-Status ListInsert(SLinkList H, int i, ElemType e);
-Status ListDelete(SLinkList H, int i, ElemType *e);
-//space[0]作为备用链表的头指针，
-//S作为链表的头指针；
+list(int)->space[list]->space[space[list].cur]->...
+*/
+Status InitSpace(Component&);
+Status InitList(Component, SLinkList);
+Status InsertElem(Component&, SLinkList, int, ElemType);
+Status DeleteElem(Component&, SLinkList, int, ElemType&);
+int LocateElem(Component, SLinkList, ElemType, bool (*)(ElemType, ElemType));
+Status GetElem(Component, SLinkList, int, ElemType);
+Status ListTraverse(Component, SLinkList, int(*)(ElemType));
+int ListLength(Component);
+bool ListEmpty(Component, SLinkList);
+int Malloc(Component&);
+void Free(Component&, int);
+//Status PriorElem(Component H, ElemType cur_e, ElemType *pre_e);
+//Status NextElem(Component H, ElemType cur_e, ElemType *next_e);
 
 int main() {
-	Component Space;
-	InitSpace(Space);
+	Component space;
+	InitSpace(space);
 	SLinkList list;
-	InitList(list);
+	InitList(space, list);
 	for (int i = 0; i < 100; ++i) {
-		InsertElem(Space, list, 1, i);
+		InsertElem(space, list, 1, i);
 	}
-	cout << "st" << endl;
-	ListTraverse(Space, list, disp);
-	cout << "ed" << endl;
+	ListTraverse(space, list, Show);
 	system("pause");
 	return 0;
 }
 
-int LocateElem(SLinkList S, ElemType e, bool (*compare)(ElemType, ElemType)) {
-	int i = S[0].cur;
-	while (i && S[i].cur != 0)
-		if (compare(S[i].data, e))  return i;
-	return 0;
+int LocateElem(Component space, SLinkList list, ElemType e, bool (*compare)(ElemType, ElemType)) {
+	int j = 1;
+    list = space[list].cur;
+    while (list) {
+        if (compare(space[list].data, e))  return j;
+        list = space[list].cur;
+        ++j;
+    }
+    return 0;
 }//LocateElem
-Status InitSpace(SLinkList& space) {
+Status InitSpace(Component& space) {
 	for (int i = 0; i < MAXSIZE - 1; ++i)space[i].cur = i + 1;
 	space[MAXSIZE - 1].cur = 0;
 	return OK;
 }//InitSpace
-int Malloc(SLinkList& space) {
+int Malloc(Component& space) {
 	int i = space[0].cur;
 	if (i) space[0].cur = space[i].cur;
 	return i;
 }//Malloc
-void Free(SLinkList& space, int k) {
+void Free(Component& space, int k) {
 	space[k].cur = space[0].cur;
 	space[0].cur = k;
 }//Free
-void Difference(SLinkList& space, ElemType& s) {
-	InitSpace(space);
-	int S = Malloc(space);
-	int r = S;
-	int n, m;
-	cin >> m >> n;
-	for (int j = 1; j <= m; j++) {
-		int i = Malloc(space);
-		cin >> space[i].data;
-		space[r].cur = i;
-		r = i;
-	}
-	space[r].cur = 0;
-	for (int j = 1; j <= n; ++j) {
-		cin >> b;
-		p = S;
-	}
-}//Difference
-Status InsertElem(SLinkList& Space, int list, int i, ElemType e) {
+//void Difference(Component& space, ElemType& s) {
+//	InitSpace(space);
+//	int S = Malloc(space);
+//	int r = S;
+//	int n, m;
+//	cin >> m >> n;
+//	for (int j = 1; j <= m; j++) {
+//		int i = Malloc(space);
+//		cin >> space[i].data;
+//		space[r].cur = i;
+//		r = i;
+//	}
+//	space[r].cur = 0;
+//	for (int j = 1; j <= n; ++j) {
+//		cin >> b;
+//		p = S;
+//	}
+//}//Difference
+Status InsertElem(Component& Space, SLinkList list, int i, ElemType e) {
 	int p = list;
 	int j = 0;
 	while (p && j < i - 1) {
@@ -96,22 +96,50 @@ Status InsertElem(SLinkList& Space, int list, int i, ElemType e) {
 	Space[p].cur = n;
 	return OK;
 }//InsertElem
-int ListLength(SLinkList S) {
-	int j = 0, i = S[1].cur;
-	while (i) {
-		i = S[i].cur;
+Status DeleteElem(Component& space, SLinkList list, int i, ElemType e) {
+    int p = list;
+    int j = 0;
+    while (p && j < i - 1) {
+        p = space[p].cur;
+        ++j;
+    }
+    if (!p || j > i - 1)return ERROR;
+    SLinkList n = space[p].cur;
+    e = space[n].data;
+    Free(space, n);
+    space[p].cur = space[n].cur;
+    return OK;
+}//DeleteElem
+int ListLength(Component& space, SLinkList list) {
+    int j = 0; 
+	while (list) {
+        list = space[list].cur;
 		++j;
 	}
 	return j;
 }//ListLength
-Status ListTraverse(SLinkList Space, int list, int(*func)(ElemType e)) {
-	while (list && !func(Space[list].data))
-		list = Space[list].cur;
+Status ListTraverse(Component space, SLinkList list, int(*func)(ElemType e)) {
+	while (list && !func(space[list].data))
+		list = space[list].cur;
 	if (list)return ERROR;
 	return OK;
 }//ListTraverse
-Status InitList(Component& S, SLinkList list){
-	list=Malloc(S);
-	S[list].cur=0;
+Status InitList(Component& space, SLinkList list){
+	list=Malloc(space);
+	space[list].cur=0;
 	return OK;
 }//InitList
+bool ListEmpty(Component space, SLinkList list){
+	return space[list].cur==0;
+}//ListEmpty
+Status GetElem(Component space, SLinkList list, int i, ElemType& e) {
+    int j = 0;
+    while (list&&j < i) {
+        list = space[list].cur;
+        ++j;
+    }
+    if (!list || j < i)return ERROR;
+    e = space[list].data;
+    return OK;
+}//GetElem
+
