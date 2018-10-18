@@ -110,4 +110,8 @@ Status ListTraverse(SLinkList Space, int list, int(*func)(ElemType e)) {
 	if (list)return ERROR;
 	return OK;
 }//ListTraverse
-Status InitList(SLinkList ){}//InitList
+Status InitList(Component& S, SLinkList list){
+	list=Malloc(S);
+	S[list].cur=0;
+	return OK;
+}//InitList
