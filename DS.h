@@ -1,3 +1,5 @@
+#include<iostream>
+
 #define TRUE        1
 #define FALSE       0
 #define OK          1
@@ -12,4 +14,11 @@ void swap(T &a, T &b) {
 	T c = a;
 	a = b;
 	b = c;
+}
+int Show(ElemType e) {
+	std::cout << e << std::endl;
+	return 0;
+}
+bool Equal(ElemType a, ElemType b) {
+	return a == b;
 }
