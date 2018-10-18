@@ -36,7 +36,6 @@ int main() {
 		InsertElem(space, list, 1, i);
 	}
 	ListTraverse(space, list, Show);
-	system("pause");
 	return 0;
 }
 
