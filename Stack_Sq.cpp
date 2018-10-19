@@ -20,7 +20,7 @@ int StackLength(SqStack);
 Status GetTop(SqStack, ElemType&);
 Status Push(SqStack&, ElemType);
 Status Pop(SqStack&, ElemType&);
-Status StackTraverse(SqStack, int (*)(ElemType));
+Status StackTraverse(SqStack, int (*)(ElemType));//from base to top
 
 int main() {
 	SqStack stack1;
@@ -55,6 +55,7 @@ Status DestoryStack(SqStack& stack) {
 } //DestoryStack
 Status ClearStack(SqStack& stack) {
 	stack.top = stack.base;
+	return OK; 
 } //ClearStack
 bool StackEmpty(SqStack stack) {
 	return stack.top == stack.base;
@@ -66,7 +67,7 @@ Status GetTop(SqStack stack, ElemType& e) {
 	if (stack.base == stack.top)
 		return ERROR;
 
-	e = *stack.top;
+	e = *(stack.top-1);
 	return OK;
 } //GetTop
 Status Push(SqStack& stack, ElemType e) {
