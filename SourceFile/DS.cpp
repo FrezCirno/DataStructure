@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#include"DS.h"
+#include"../HeadFile/DS.h"
 template <typename T>
 void swap(T& a, T& b) {
 	T c = a;

@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#include "List_Sq.h"
+#include "../HeadFile/List_Sq.h"
 Status InitList(SqList &L) {
 	L.elem = (ElemType*)malloc(LIST_INIT_SIZE * sizeof(ElemType));
 	if(!L.elem)exit(OVERFLOW);

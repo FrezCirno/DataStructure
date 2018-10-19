@@ -1,10 +1,9 @@
 #include <iostream>
 using namespace std;
 #include "Stack_Sq.h"
-typedef char ElemType;
 int main(int argc, char const* argv[]) {
 	SqStack stack;
-	ElemType c, e;
+	ElemType c, elem;
 	InitStack(stack);
 
 	while ((c = getchar()) != EOF) {
@@ -18,9 +17,9 @@ int main(int argc, char const* argv[]) {
 			case ')':
 			case ']':
 			case '}':
-				Pop(stack, e);
+				Pop(stack, elem);
 
-				if (e == c - 1) {
+				if (elem == c - 1) {
 					break;
 				} else {
 					return 1;

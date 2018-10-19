@@ -7,5 +7,8 @@
 #define OVERFLOW -2
 typedef int ElemType;
 typedef int Status;
-
+template <typename T>
+void swap(T& a, T& b);
+int Show(ElemType);
+bool Equal(ElemType, ElemType);
 #endif

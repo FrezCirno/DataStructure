@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#include"Triplet.h"
+#include"../HeadFile/Triplet.h"
 
 Status InitTriplet(Triplet &T, ElemType v1, ElemType v2, ElemType v3) {
 	T = (ElemType*)malloc(3 * sizeof(ElemType));

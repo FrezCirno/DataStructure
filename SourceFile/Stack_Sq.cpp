@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include "Stack_Sq.h"
+#include "../HeadFile/Stack_Sq.h"
 
 Status InitStack(SqStack& stack) {
 	stack.base = (ElemType*)malloc(STACK_INIT_SIZE * sizeof(ElemType));

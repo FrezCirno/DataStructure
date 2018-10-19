@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include "List_Link.h"
+#include "../HeadFile/List_Link.h"
 Status InitList(LinkList& L) {
 	L = (LinkList)malloc(sizeof(LNode));
 	L->next = NULL;
