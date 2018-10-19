@@ -2,139 +2,165 @@
 #include "DS.h"
 using namespace std;
 
-typedef struct LNode
+typedef struct DuLNode
 {
     ElemType data;
-    struct LNode *next;
-} LNode, *LinkList;
+    struct DuLNode *prior;
+    struct DuLNode *next;
+} DuLNode, *DuLinkList;
 /*
-list1(*)->HeadNode->Node1->...->Noden
+list1(*)<->HeadNode<->Node1<->...<->Noden
 */
-Status InitList(LinkList &);
-Status ListInsert(LinkList &, int, ElemType);
-Status ListDelete(LinkList &, int, ElemType &);
-Status GetElem(LinkList, int, ElemType &);
-Status CreateList /*Head Insert*/ (LinkList &, int);
-Status DestroyList(LinkList &);
-bool ListEmpty(LinkList);
-int ListLength(LinkList);
-//int LocateElem(LinkList, ElemType, bool (*)(ElemType, ElemType));
+Status InitList(DuLinkList &);
+Status ListInsert(DuLinkList &, int, ElemType);
+Status ListDelete(DuLinkList &, int, ElemType &);
+Status GetElem(DuLinkList, int, ElemType &);
+Status CreateList /*Head Insert*/ (DuLinkList &, int);
+Status DestroyList(DuLinkList &);
+bool ListEmpty(DuLinkList);
+int ListLength(DuLinkList);
+//int LocateElem(DuLinkList, ElemType, bool (*)(ElemType, ElemType));
 //Status PriorElem(SqList, ElemType, ElemType&);
 //Status NextElem(SqList, ElemType, ElemType&);
-Status ListTraverse(LinkList &, void (*)(ElemType));
+Status ListTraverse(DuLinkList &, void (*)(ElemType));
 
 int main()
 {
-    LinkList list1 = NULL;
+    DuLinkList list1 = NULL;
     ElemType e;
     InitList(list1);
+
     for (int i = 0; i < 100; ++i)
         ListInsert(list1, 1, 1.0 / i);
+
     ListDelete(list1, 1, e);
     ListTraverse(list1, Show);
     return 0;
 }
 
-Status InitList(LinkList &L)
+Status InitList(DuLinkList &L)
 {
-    L = (LinkList)malloc(sizeof(LNode));
-    L->next = NULL;
+    L = (DuLinkList)malloc(sizeof(DuLNode));
+    L->prior = L->next = NULL;
     return OK;
 } //InitList
-int ListLength(LinkList L)
+int ListLength(DuLinkList L)
 {
     int j = 0;
+
     while (L)
     {
         L = L->next;
         ++j;
     }
+
     return j;
 } //ListLength
-Status ListInsert(LinkList &L, int i, ElemType e)
+Status ListInsert(DuLinkList &L, int i, ElemType e)
 {
-    LNode *p = L;
+    DuLNode *p = L;
     int j = 0;
+
     while (p && j < i - 1)
     {
         p = p->next;
         ++j;
     }
+
     if (!p || j > i - 1)
         return ERROR;
-    LNode *s = (LinkList)malloc(sizeof(LNode));
+
+    DuLNode *s = (DuLinkList)malloc(sizeof(DuLNode));
     s->data = e;
     s->next = p->next;
     p->next = s;
+    s->next->prior = s;
+    s->prior = p;
     return OK;
 } //ListInsert
-Status ListDelete(LinkList &L, int i, ElemType &e)
+Status ListDelete(DuLinkList &L, int i, ElemType &e)
 {
-    LinkList p = L;
+    DuLinkList p = L;
     int j = 0;
+
     while (p->next && j < i - 1)
     {
         p = p->next; //j=i-1
         ++j;
     }
+
     if (!(p->next) || j > i - 1)
         return ERROR;
-    LinkList q = p->next;
+
+    DuLinkList q = p->next;
     p->next = q->next;
+    q->next->prior = p;
     e = q->data;
     free(q);
     return OK;
 } //ListDelete
-Status GetElem(LinkList L, int i, ElemType &e)
+Status GetElem(DuLinkList L, int i, ElemType &e)
 {
-    LinkList p = L;
+    DuLinkList p = L;
     int j = 0;
+
     while (p && j < i)
     {
         p = p->next;
         ++j;
     }
+
     if (!p || j > i)
         return ERROR;
+
     e = p->data;
     return OK;
 } //GetElem
-Status CreateList /*Head Insert*/ (LinkList &L, int n)
+Status CreateList /*Head Insert*/ (DuLinkList &L, int n)
 {
-    L = (LinkList)malloc(sizeof(LNode));
+    L = (DuLinkList)malloc(sizeof(DuLNode));
     L->next = NULL;
-    LinkList p;
+    DuLinkList p;
+
     for (int i = n; i > 0; --i)
     {
-        p = (LinkList)malloc(sizeof(LNode));
+        p = (DuLinkList)malloc(sizeof(DuLNode));
         cin >> p->data;
         p->next = L->next;
+        L->next->prior = p;
+        p->prior = L;
         L->next = p;
     }
+
     return OK;
 } //CreateList
-Status DestroyList(LinkList &L)
+Status DestroyList(DuLinkList &L)
 {
-    LinkList p = L, q = L;
+    DuLinkList p = L, q = L;
+
     do
     {
         q = p->next;
         free(p);
         p = q;
     } while (p);
+
     L = NULL;
     return OK;
 } //DestroyList
-bool ListEmpty(LinkList L)
+bool ListEmpty(DuLinkList L)
 {
     return L->next == NULL;
 } //ListEmpty
-Status ListTraverse(LinkList &L, int (*func)(ElemType))
+Status ListTraverse(DuLinkList &L, int (*func)(ElemType))
 {
-    LinkList p = L->next;
+    DuLinkList p = L->next;
+
     while (p && !func(p->data))
         p = p->next;
+
     if (p)
         return ERROR;
+
     return OK;
 } //ListTraverse
