@@ -1,41 +1,6 @@
 #include <iostream>
-#include "DS.h"
 using namespace std;
-#define STACK_INIT_SIZE 100
-#define STACKINCREMENT 10
-typedef struct {
-	ElemType* base;
-	ElemType* top;
-	int stacksize;
-} SqStack;
-/*
-	 __________________________________________________
-base|_1|_2|_3|_top|__|__|______________________________|
-*/
-Status InitStack(SqStack&);
-Status DestoryStack(SqStack&);
-Status ClearStack(SqStack&);
-bool StackEmpty(SqStack);
-int StackLength(SqStack);
-Status GetTop(SqStack, ElemType&);
-Status Push(SqStack&, ElemType);
-Status Pop(SqStack&, ElemType&);
-Status StackTraverse(SqStack, int (*)(ElemType));//from base to top
-
-int main() {
-	SqStack stack1;
-	InitStack(stack1);
-	cout << "Empty=" << StackEmpty(stack1) << endl;
-
-	for (int i = 0; i < 100; ++i)
-		Push(stack1, 1.0 / i);
-
-	StackTraverse(stack1, Show);
-	ElemType e;
-	GetTop(stack1, e);
-	cout << e;
-	return 0;
-}
+#include "Stack_Sq.h"
 
 Status InitStack(SqStack& stack) {
 	stack.base = (ElemType*)malloc(STACK_INIT_SIZE * sizeof(ElemType));
@@ -55,7 +20,7 @@ Status DestoryStack(SqStack& stack) {
 } //DestoryStack
 Status ClearStack(SqStack& stack) {
 	stack.top = stack.base;
-	return OK; 
+	return OK;
 } //ClearStack
 bool StackEmpty(SqStack stack) {
 	return stack.top == stack.base;
@@ -67,7 +32,7 @@ Status GetTop(SqStack stack, ElemType& e) {
 	if (stack.base == stack.top)
 		return ERROR;
 
-	e = *(stack.top-1);
+	e = *(stack.top - 1);
 	return OK;
 } //GetTop
 Status Push(SqStack& stack, ElemType e) {

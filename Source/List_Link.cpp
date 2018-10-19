@@ -1,41 +1,6 @@
 #include <iostream>
-#include "DS.h"
 using namespace std;
-
-typedef struct LNode {
-	ElemType data;
-	struct LNode* next;
-} LNode, *LinkList;
-/*
-list1(*)->HeadNode->Node1->...->Noden
-*/
-Status InitList(LinkList&);
-Status ListInsert(LinkList&, int, ElemType);
-Status ListDelete(LinkList&, int, ElemType&);
-Status GetElem(LinkList, int, ElemType&);
-Status CreateList /*Head Insert*/ (LinkList&, int);
-Status DestroyList(LinkList&);
-bool ListEmpty(LinkList);
-int ListLength(LinkList);
-//int LocateElem(LinkList, ElemType, bool (*)(ElemType, ElemType));
-//Status PriorElem(SqList, ElemType, ElemType&);
-//Status NextElem(SqList, ElemType, ElemType&);
-Status ListTraverse(LinkList&, void (*)(ElemType));
-
-int main() {
-	LinkList list1 = NULL;
-	ElemType e;
-	InitList(list1);
-
-	for (int i = 0; i < 100; ++i) {
-		ListInsert(list1, 1, 1.0 / i);
-	}
-
-	ListDelete(list1, 1, e);
-	ListTraverse(list1, Show);
-	return 0;
-}
-
+#include "List_Link.h"
 Status InitList(LinkList& L) {
 	L = (LinkList)malloc(sizeof(LNode));
 	L->next = NULL;

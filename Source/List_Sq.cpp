@@ -1,43 +1,6 @@
 #include<iostream>
-#include "DS.h"
 using namespace std;
-#define LIST_INIT_SIZE  100
-#define LISTINCREMENT   10
-typedef struct {
-	ElemType* elem;
-	int length;
-	int listsize;
-} SqList;
-Status InitList(SqList&);
-Status DestroyList(SqList&);
-Status ClearList(SqList&);
-bool ListEmpty(SqList);
-int ListLength(SqList);
-Status GetElem(SqList, int, ElemType&);
-int LocateElem(SqList, ElemType, bool (*)(ElemType, ElemType));
-Status PriorElem(SqList, ElemType, ElemType&);
-Status NextElem(SqList, ElemType, ElemType&);
-Status ListInsert(SqList&, int, ElemType);//1<=i<=L.length
-Status ListDelete(SqList&, int, ElemType&);//1<=i<=L.length
-Status ListTraverse(SqList&, int(*)(ElemType));
-Status Union(SqList&, SqList);
-Status MergeList(SqList, SqList, SqList&);
-
-int main() {
-	SqList list1, list2;
-	InitList(list1);
-	InitList(list2);
-	for(int i = 1; i < 101; ++i)
-		ListInsert(list1, 1, 1.0 / i);
-	for(int i = 1; i < 101; ++i)
-		ListInsert(list2, 1, -1.0 / i);
-	Union(list1, list2);
-	ListTraverse(list1, Show);
-	cout << ListLength(list1) << endl;
-	return 0;
-}
-
-
+#include "List_Sq.h"
 Status InitList(SqList &L) {
 	L.elem = (ElemType*)malloc(LIST_INIT_SIZE * sizeof(ElemType));
 	if(!L.elem)exit(OVERFLOW);
