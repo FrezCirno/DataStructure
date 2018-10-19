@@ -1,3 +1,18 @@
 {
-    "git.path":"D:/Program Files/Git/cmd/git.exe"
+    "git.path":"D:/Program Files/Git/cmd/git.exe",
+    "astyle.cmd_options":[
+        "--style=java",
+        "--indent-classes" ,
+        "--indent-switches" ,
+        "--indent-namespaces",
+        "--indent-labels" ,
+        "--indent-preprocessor",
+        "--break-blocks",
+        "--delete-empty-lines",
+        "--pad-oper",
+        "--align-pointer=type",
+        "--add-braces",
+        "--indent=tab=4" ,
+        "-p"
+    ]
 }
