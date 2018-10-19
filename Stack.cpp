@@ -17,12 +17,23 @@ Status DestoryStack(SqStack&);
 Status ClearStack(SqStack&);
 bool StackEmpty(SqStack);
 int StackLength(SqStack);
-Status GetTop(SqStack S, ElemType&);
-Status Push(SqStack& S, ElemType e);
-Status Pop(SqStack& S, ElemType& e);
-Status StackTraverse(SqStack S, int (*)(ElemType));
+Status GetTop(SqStack, ElemType&);
+Status Push(SqStack&, ElemType);
+Status Pop(SqStack&, ElemType&);
+Status StackTraverse(SqStack, int (*)(ElemType));
 
 int main() {
+	SqStack stack1;
+	InitStack(stack1);
+	cout << "Empty=" << StackEmpty(stack1) << endl;
+
+	for (int i = 0; i < 100; ++i)
+		Push(stack1, 1.0 / i);
+
+	StackTraverse(stack1, Show);
+	ElemType e;
+	GetTop(stack1, e);
+	cout << e;
 	return 0;
 }
 
@@ -81,9 +92,12 @@ Status Pop(SqStack& stack, ElemType& e) {
 } //Pop
 Status StackTraverse(SqStack stack, int (*func)(ElemType)) {
 	ElemType* p = stack.base;
+
 	while (p < stack.top && !func(*p))
 		++p;
+
 	if (p < stack.top)
 		return ERROR;
+
 	return OK;
 } //StackTraverse
