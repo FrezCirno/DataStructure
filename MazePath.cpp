@@ -2,6 +2,10 @@
 using namespace std;
 #include "HeadFile/Stack_Sq.h"
 typedef struct{
+    int x;
+    int y;
+}PosType;
+typedef struct{
     int ord;
     PosType seat;
     int di;
