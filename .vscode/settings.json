@@ -1,5 +1,4 @@
 {
-    "git.path":"D:/Program Files/Git/cmd/git.exe",
     "astyle.cmd_options":[
         "--style=java",
         "--indent-classes" ,

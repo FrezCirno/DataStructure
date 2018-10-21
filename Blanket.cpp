@@ -1,11 +1,10 @@
 #include <iostream>
+#include "HeadFile/Stack_Sq.h"
 using namespace std;
-#include "Stack_Sq.h"
-int main(int argc, char const* argv[]) {
+int main() {
 	SqStack stack;
 	ElemType c, elem;
 	InitStack(stack);
-
 	while ((c = getchar()) != EOF) {
 		switch (c) {
 			case '(':
