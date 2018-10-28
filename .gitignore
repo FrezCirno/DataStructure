@@ -2,3 +2,7 @@
 !*.c
 !*.cpp
 !*.h
+!Execs/
+!Demo/
+!HeadFile/
+!SourceFile/
