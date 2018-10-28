@@ -7,5 +7,4 @@
 #define TRUE 1
 #define FALSE 0
 typedef int Status;
-typedef int ElemType;
 #endif

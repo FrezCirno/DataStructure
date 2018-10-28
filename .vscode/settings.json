@@ -1,18 +1,16 @@
 {
-    "astyle.cmd_options":[
-        "--style=java",
-        "--indent-classes" ,
-        "--indent-switches" ,
+    "astyle.cmd_options": [
+        "-A2",
+        "--indent=tab=4",
+        "--indent-classes",
+        "--indent-switches",
         "--indent-namespaces",
-        "--indent-labels" ,
+        "--indent-labels",
         "--indent-preprocessor",
-        "--break-blocks",
-        "--delete-empty-lines",
         "--pad-oper",
         "--align-pointer=type",
-        "--add-braces",
-        "--indent=tab=4" ,
-        "-p"
+        "--align-reference=type",
+        "--keep-one-line-statements"
     ],
     "files.associations": {
         "cmath": "cpp",
@@ -50,5 +48,6 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp"
-    }
+    },
+    "astyle.executable": "D:/Program Files/Dev-Cpp/AStyle/AStyle.exe"
 }
