@@ -2,6 +2,7 @@
 using namespace std;
 typedef char ElemType;
 #include "HeadFile/Stack_Sq.h"
+#include "HeadFile/DSF.h"
 int main(int argc, char const* argv[]) {
 	SqStack stack;
 	ElemType c, elem;
