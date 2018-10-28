@@ -1,4 +1,5 @@
 #include <iostream>
+typedef char ElemType;
 #include "HeadFile/Stack_Sq.h"
 using namespace std;
 int main() {
@@ -12,19 +13,19 @@ int main() {
 			case '{':
 				Push(stack, c);
 				break;
-
 			case ')':
+				if(Pop(stack, elem) == OK && elem == '(')break;
+				else return ERROR;
 			case ']':
+				if(Pop(stack, elem) == OK && elem == '[')break;
+				else return ERROR;
 			case '}':
-				Pop(stack, elem);
-
-				if (elem == c - 1) {
-					break;
-				} else {
-					return 1;
-				}
+				if(Pop(stack, elem) == OK && elem == '{')break;
+				else return ERROR;
+			default:
+				;
 		}
 	}
-
+	if(!StackEmpty(stack))return ERROR;
 	return 0;
 }

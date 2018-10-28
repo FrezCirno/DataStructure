@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 #include "../HeadFile/Stack_Sq.h"
 
@@ -66,4 +67,4 @@ Status StackTraverse(SqStack stack, int (*func)(ElemType)) {
 		return ERROR;
 
 	return OK;
-} //StackTraverse
+} //StackTravers

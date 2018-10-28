@@ -1,5 +1,5 @@
 #include <iostream>
-#include "DS.h"
+#include "HeadFile/DS.h"
 using namespace std;
 
 typedef struct DuLNode {
@@ -21,7 +21,7 @@ int ListLength(DuLinkList);
 //int LocateElem(DuLinkList, ElemType, bool (*)(ElemType, ElemType));
 //Status PriorElem(SqList, ElemType, ElemType&);
 //Status NextElem(SqList, ElemType, ElemType&);
-Status ListTraverse(DuLinkList&, void (*)(ElemType));
+Status ListTraverse(DuLinkList&, int (*)(ElemType));
 
 int main() {
 	DuLinkList list1 = NULL;

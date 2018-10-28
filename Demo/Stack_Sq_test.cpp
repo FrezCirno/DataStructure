@@ -1,17 +1,30 @@
 #include <iostream>
 using namespace std;
-#include"Stack_Sq.h"
+#include"../HeadFile/Stack_Sq.h"
 int main() {
 	SqStack stack1;
 	InitStack(stack1);
 	cout << "Empty=" << StackEmpty(stack1) << endl;
-
-	for (int i = 0; i < 100; ++i)
-		Push(stack1, 1.0 / i);
-
-	StackTraverse(stack1, Show);
 	ElemType e;
-	GetTop(stack1, e);
-	cout << e;
+	cout << (Push(stack1, 1.0) == OK ? "Push Success" : "Push Failed");
+	StackTraverse(stack1, Print);
+	cout << endl;
+	cout << (Push(stack1, 2.0) == OK ? "Push Success" : "Push Failed");
+	StackTraverse(stack1, Print);
+	cout << endl;
+	cout << (Push(stack1, 3.0) == OK ? "Push Success" : "Push Failed");
+	StackTraverse(stack1, Print);
+	cout << endl;
+	cout << (Pop(stack1, e) == OK ? "Pop Success" : "Pop Failed");
+	StackTraverse(stack1, Print);
+	cout << endl;
+	cout << (Pop(stack1, e) == OK ? "Pop Success" : "Pop Failed");
+	StackTraverse(stack1, Print);
+	cout << endl;
+	cout << (Pop(stack1, e) == OK ? "Pop Success" : "Pop Failed");
+	StackTraverse(stack1, Print);
+	cout << endl;
+	cout << (Pop(stack1, e) == OK ? "Pop Success" : "Pop Failed");
+	StackTraverse(stack1, Print);
 	return 0;
 }

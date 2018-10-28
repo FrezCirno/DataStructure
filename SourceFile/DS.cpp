@@ -7,7 +7,11 @@ void swap(T& a, T& b) {
 	a = b;
 	b = c;
 }
-int Show(ElemType e) {
+int Print(ElemType e) {
+	cout << e;
+	return 0;
+}
+int PrintLine(ElemType e) {
 	cout << e << endl;
 	return 0;
 }

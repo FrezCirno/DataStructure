@@ -1,5 +1,5 @@
 #include <iostream>
-#include "DS.h"
+#include "HeadFile/DS.h"
 using namespace std;
 
 typedef struct LNode {
@@ -23,7 +23,7 @@ int ListLength(LinkList);
 //int LocateElem(LinkList, ElemType, bool (*)(ElemType, ElemType));
 //Status PriorElem(SqList, ElemType, ElemType&);
 //Status NextElem(SqList, ElemType, ElemType&);
-Status ListTraverse(LinkList&, void (*)(ElemType));
+Status ListTraverse(LinkList&, int (*)(ElemType));
 
 int main() {
 	LinkList list1 = NULL;
