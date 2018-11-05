@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string.h>
+#include <stdlib.h>
 using namespace std;
-#include "String_S.h"
+#include "../HeadFile/String_S.h"
 Status StrAssign(SString& S, char* src){
 	int len=strlen(src);
 	if(len>MAXSTRLEN) S[0]=MAXSTRLEN;
@@ -58,7 +60,6 @@ Status SubString(SString& sub, SString S, int pos, int len) {
 } //SubString
 int Index(SString S, SString T, int pos) {
 	if(S[0] < T[0]+pos-1) return FALSE;
-
 	int *next=(int*)malloc((T[0] + 1) * sizeof(int));
 	int i = 1, j = 0;
 	next[1] = 0;
@@ -68,18 +69,18 @@ int Index(SString S, SString T, int pos) {
 			if (T[i] != T[j]) next[i] = j;
 			else next[i] = next[j];
 		} else j = next[j];
-
 	j = 1;
-	while (pos < S[0] && j < T[0]) {
+	while (pos <= S[0] && j <= T[0]) 
 		if (j == 0 || S[pos] == T[j]) {++pos; ++j;} 
 		else {j = next[j];}
-	}
-	if (j > T[0])
-		return pos - T[0];
-	else
-		return FALSE;
+	free(next);
+	if (j > T[0]) return pos - T[0];
+	else return FALSE;
 } //Index
 Status Replace(SString&, SString, SString);
 Status StrInsert(SString&, int, SString);
 Status StrDelete(SString&, int, SString);
 Status DestroyString(SString);
+Status PrintString(SString S){
+	for(int i=1;i<=S[0];++i)cout<<S[i];
+}//PrintString

@@ -18,5 +18,6 @@ Status Replace(SString&, SString, SString);
 Status StrInsert(SString&, int, SString);
 Status StrDelete(SString&, int, SString);
 Status DestroyString(SString);
+Status PrintString(SString);
 
 #endif
