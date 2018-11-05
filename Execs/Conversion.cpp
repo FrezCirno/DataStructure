@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 typedef int ElemType;
-#include "HeadFile/Stack_Sq.h"
+#include "Stack_Sq.h"
 void Conversion() {
 	SqStack stack;
 	ElemType e;

@@ -7,7 +7,7 @@
 typedef unsigned char SString[MAXSTRLEN + 1];
 Status StrAssign(SString&, char*);
 Status StrCopy(SString&, SString);
-Status StrEmpty(SString);
+bool StrEmpty(SString);
 int StrCompare(SString, SString); //>=<
 int StrLength(SString);
 Status ClearString(SString&);

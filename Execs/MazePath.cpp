@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "MazePath.h"
-#include "HeadFile/Stack_Sq.h"
+#include "Stack_Sq.h"
 Status MazePath(MazeType maze, PosType start, PosType end, SqStack& path) {
 	PosType curpos = start;
 	PathNode now;
@@ -10,30 +10,30 @@ Status MazePath(MazeType maze, PosType start, PosType end, SqStack& path) {
 
 	do {
 		if (!maze[curpos.x][curpos.y] && !Book[curpos.x][curpos.y]) {
-			//¿ÉÍ¨ÇÒÃ»×ß¹ý
-			Book[curpos.x][curpos.y] = 1; //±ê¼Ç
+			//ï¿½ï¿½Í¨ï¿½ï¿½Ã»ï¿½ß¹ï¿½
+			Book[curpos.x][curpos.y] = 1; //ï¿½ï¿½ï¿½
 			now.ord = curstep;
 			now.pos = curpos;
 			now.di = 0;
 			Push(path, now); //Ñ¹Õ»
 
-			if (curpos.x == end.x && curpos.y == end.y) return (TRUE);    //ÅÐ¶Ï
+			if (curpos.x == end.x && curpos.y == end.y) return (TRUE);    //ï¿½Ð¶ï¿½
 
 
 			curpos.x += dirpos[now.di][0];
 			curpos.y += dirpos[now.di][1];
-			curstep++; //×ßµ½ÏÂÒ»²½
+			curstep++; //ï¿½ßµï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 		} else {
-			//²»¿ÉÍ¨»ò×ß¹ý
+			//ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ß¹ï¿½
 			if (!StackEmpty(path)) {
-				//»¹Ã»ÍË»ØÆðµã
+				//ï¿½ï¿½Ã»ï¿½Ë»ï¿½ï¿½ï¿½ï¿½
 				do {
-					Pop(path, now);				  //ºóÍËÒ»²½
-					Book[now.pos.x][now.pos.y] = 1; //±ê¼Ç²»¿ÉÍ¨
-				} while (now.di == 3 && !StackEmpty(path));//Èç¹ûÉÏÒ»²½ÊÇÏòÉÏ×ßµÄ
-				//²»ÊÇÏòÉÏ×ßµÄ»òÕ»ÒÑ¿Õ
-				if (now.di < 3) {//»¹Ã»Ì½Ë÷¹ý
-					now.di ++; //ÏÂÒ»·½Ïò
+					Pop(path, now);				  //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+					Book[now.pos.x][now.pos.y] = 1; //ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Í¨
+				} while (now.di == 3 && !StackEmpty(path));//ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄ»ï¿½Õ»ï¿½Ñ¿ï¿½
+				if (now.di < 3) {//ï¿½ï¿½Ã»Ì½ï¿½ï¿½ï¿½ï¿½
+					now.di ++; //ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 					Push(path, now);
 					curpos.x = now.pos.x + dirpos[now.di][0];
 					curpos.y = now.pos.y + dirpos[now.di][1];

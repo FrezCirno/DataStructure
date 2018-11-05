@@ -10,8 +10,8 @@ typedef struct
     ElemType *top;
     int stacksize;
 } SqStack;
-/*	 __________________________________________________
-base|_1|_2|_3|_top|__|__|______________________________|
+/*	    __________________________________________________
+base = |_1|_2|_3|_top|__|__|______________________________|
 */
 Status InitStack(SqStack &);
 Status DestoryStack(SqStack &);

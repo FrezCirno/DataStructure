@@ -1,6 +1,6 @@
 #include <iostream>
 typedef char ElemType;
-#include "HeadFile/Stack_Sq.h"
+#include "Stack_Sq.h"
 using namespace std;
 int main() {
 	SqStack stack;

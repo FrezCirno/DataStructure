@@ -10,6 +10,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-g",
                 "-Wall",
+                "-O2",
                 "-static-libgcc"
             ],
             "type": "shell",
