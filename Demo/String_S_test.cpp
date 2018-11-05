@@ -1,5 +1,5 @@
 #include <iostream>
-using namespace std;
+using namespace std; 
 #include "../HeadFile/String_S.h"
 int main() {
 	SString s1,s2;
