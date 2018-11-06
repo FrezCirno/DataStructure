@@ -17,6 +17,10 @@ typedef struct {
 	IdxTermType item[MAXKEYNUM + 1];//dont use 0
 	int last;
 } IdxListType;
+/*                      _________________________
+IdxListType -> item -> |_0|_1|_2|_3|_____________
+		  \_.->last ->-./
+*/
 char* buf;
 WordListType wdlist;
 

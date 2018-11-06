@@ -20,8 +20,8 @@ int main() {
 
 
 void InitIdxList(IdxListType& idxlist) {
-	for()
-		idxlist.last = 0;
+	idxlist.item[0].keyword
+	idxlist.last = 0;
 }
 void GetLine(FILE f);
 void ExactKeyWord(ElemType& bno);
@@ -35,7 +35,7 @@ void GetWord(int i, HString& wd) {
 }//GetWord
 int Locate(IdxListType idxlist, HString wd, bool& exist) {
 	int i, m;
-	for(i = idxlist.last - 1; (m = StrCompare(idxlist.item[i].keyword, wd)) > 0; --i);
+	for(i = idxlist.last - 1; i > 0 && (m = StrCompare(idxlist.item[i].keyword, wd)) > 0; --i);
 	if(!m) {
 		exist = TRUE;
 		return i;
