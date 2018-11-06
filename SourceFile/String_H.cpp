@@ -23,9 +23,8 @@ Status StrAssign(HString& T, char* chars) {
 Status StrCopy(HString&, HString);
 Status StrEmpty(HString);
 int StrCompare(HString str1, HString str2) {
-	//>=<
-    while(*str1.ch++ == *str2.ch++);
-    return *--str1.ch < *--str2.ch;
+	while(*str1.ch && *str2.ch && *str1.ch == *str2.ch) {++str1.ch; ++str2.ch;}
+	return *str1.ch - *str2.ch;
 } //StrCompare
 int StrLength(HString S) {
 	return S.length;

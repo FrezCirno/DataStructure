@@ -1,5 +1,6 @@
 #include <iostream>
 #include "HeadFile/DS.h"
+#include "HeadFile/DSF.h"
 using namespace std;
 
 typedef struct LNode {
@@ -35,7 +36,7 @@ int main() {
 	}
 
 	ListDelete(list1, 1, e);
-	ListTraverse(list1, Show);
+	ListTraverse(list1, Print);
 	return 0;
 }
 
@@ -50,25 +51,17 @@ int ListLength(LinkList list) {
 	while (p != list) {
 		p = p->next;
 		++j;
-	} 
-    return j;
+	}
+	return j;
 } //ListLength
 Status ListInsert(LinkList& list, int i, ElemType e) {
 	LNode* p = list;
 	int j = 0;
-
 	while (p && j < i - 1) {
 		p = p->next;
 		++j;
 	}
-
-	if (!p || j > i - 1) {
-		return ERROR;
-	}
-
-	{
-	}
-
+	if (!p || j > i - 1) return ERROR;
 	LNode* s = (LinkList)malloc(sizeof(LNode));
 	s->data = e;
 	s->next = p->next;
@@ -78,19 +71,11 @@ Status ListInsert(LinkList& list, int i, ElemType e) {
 Status ListDelete(LinkList& list, int i, ElemType& e) {
 	LinkList p = list;
 	int j = 0;
-
 	while (p->next && j < i - 1) {
 		p = p->next; //j=i-1
 		++j;
 	}
-
-	if (!(p->next) || j > i - 1) {
-		return ERROR;
-	}
-
-	{
-	}
-
+	if (!(p->next) || j > i - 1) return ERROR;
 	LinkList q = p->next;
 	p->next = q->next;
 	e = q->data;
@@ -100,44 +85,32 @@ Status ListDelete(LinkList& list, int i, ElemType& e) {
 Status GetElem(LinkList list, int i, ElemType& e) {
 	LinkList p = list;
 	int j = 0;
-
 	while (p && j < i) {
 		p = p->next;
 		++j;
 	}
-
-	if (!p || j > i) {
-		return ERROR;
-	}
-
-	{
-		e = p->data;
-	}
-
+	if (!p || j > i) return ERROR;
+	e = p->data;
 	return OK;
 } //GetElem
-Status CreateList /*Head Insert*/ (LinkList& list, int n) {
+Status CreateList(LinkList& list, int n) { /*Head Insert*/
 	list = (LinkList)malloc(sizeof(LNode));
 	list->next = list;
 	LinkList p;
-
 	for (int i = 0; i < n; ++i) {
 		p = (LinkList)malloc(sizeof(LNode));
 		cin >> p->data;
 		p->next = list->next;
 		list->next = p;
 	}
-
 	return OK;
 } //CreateList
 Status DestroyList(LinkList& list) {
 	LinkList p = list, q = list;
-
 	do {
 		q = p->next;
 		p = q;
 	} while (p);
-
 	list = NULL;
 	return OK;
 } //DestroyList
@@ -146,11 +119,7 @@ bool ListEmpty(LinkList list) {
 } //ListEmpty
 Status ListTraverse(LinkList& list, int (*func)(ElemType)) {
 	LinkList p = list->next;
-	while (p != list && !func(p->data)) {
-		p = p->next;
-	}
-	if (p) {
-		return ERROR;
-	}
+	while (p != list && !func(p->data)) p = p->next;
+	if (p) return ERROR;
 	return OK;
 }//ListTraverse

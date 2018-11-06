@@ -3,20 +3,30 @@
 #include <stdlib.h>
 using namespace std;
 #include "../HeadFile/String_S.h"
-Status StrAssign(SString& S, char* src){
-	int len=strlen(src);
-	if(len>MAXSTRLEN) S[0]=MAXSTRLEN;
-	else S[0]=len;
+Status StrAssign(SString& S, char* src) {
+	int len = strlen(src);
+	if(len > MAXSTRLEN) S[0] = MAXSTRLEN;
+	else S[0] = len;
 	unsigned char* dst = S + 1;
-	for(int i=0;i<S[0];++i) dst[i]=src[i];
-	if(len>MAXSTRLEN)return OVERFLOW;
+	for(int i = 0; i < S[0]; ++i) dst[i] = src[i];
+	if(len > MAXSTRLEN)return OVERFLOW;
 	return OK;
 }//StrAssign
-Status StrCopy(SString&, SString);
+Status StrCopy(SString& dst, SString src) {
+	for(int i = src[0]; i >= 0; --i)dst[i] = src[i];
+	return OK;
+}//StrCopy
 bool StrEmpty(SString S) {
 	return S[0] == 0;
 } //StrEmpty
-int StrCompare(SString, SString); //>=<
+int StrCompare(SString s1, SString s2) {
+	++s1; ++s2;
+	while(*s1 && *s2 && *s1 == *s2) {
+		++s1;
+		++s2;
+	}
+	return *s1 - *s2;
+} //StrCompare
 int StrLength(SString S) {
 	return S[0];
 } //StrLength
@@ -59,20 +69,24 @@ Status SubString(SString& sub, SString S, int pos, int len) {
 	return OK;
 } //SubString
 int Index(SString S, SString T, int pos) {
-	if(S[0] < T[0]+pos-1) return FALSE;
-	int *next=(int*)malloc((T[0] + 1) * sizeof(int));
+	if(S[0] < T[0] + pos - 1) return FALSE;
+	int* next = (int*)malloc((T[0] + 1) * sizeof(int));
 	int i = 1, j = 0;
 	next[1] = 0;
 	while (i < T[0])
-		if (j == 0 || T[i] == T[j]) { 
+		if (j == 0 || T[i] == T[j]) {
 			++i; ++j;
 			if (T[i] != T[j]) next[i] = j;
 			else next[i] = next[j];
 		} else j = next[j];
 	j = 1;
-	while (pos <= S[0] && j <= T[0]) 
-		if (j == 0 || S[pos] == T[j]) {++pos; ++j;} 
-		else {j = next[j];}
+	while (pos <= S[0] && j <= T[0])
+		if (j == 0 || S[pos] == T[j]) {
+			++pos;
+			++j;
+		} else {
+			j = next[j];
+		}
 	free(next);
 	if (j > T[0]) return pos - T[0];
 	else return FALSE;
@@ -81,6 +95,6 @@ Status Replace(SString&, SString, SString);
 Status StrInsert(SString&, int, SString);
 Status StrDelete(SString&, int, SString);
 Status DestroyString(SString);
-Status PrintString(SString S){
-	for(int i=1;i<=S[0];++i)cout<<S[i];
+Status PrintString(SString S) {
+	for(int i = 1; i <= S[0]; ++i)cout << S[i];
 }//PrintString

@@ -44,5 +44,10 @@ int Locate(IdxListType idxlist, HString wd, bool& exist) {
 		return i + 1;
 	}
 }//Locate
-Status InsertNewKey(IdxListType& idxlist, int i, int bno);
+Status InsertNewKey(IdxListType& idxlist, int i, HString wd) {
+	for(int j = idxlist.last - 1; j >= i; --j) idxlist.item[j + 1] = idxlist.item[j];
+	StrCopy(idxlist.item[i].keyword, wd);
+	InitList(idxlist.item[i].bnolist);
+	++idxlist.last;
+}//InsertNewKey
 Status InsertBook(IdxListType& idxlist, int bno);

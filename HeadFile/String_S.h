@@ -5,10 +5,13 @@
 
 #define MAXSTRLEN 255
 typedef unsigned char SString[MAXSTRLEN + 1];
+/*
+str -> len+char*
+*/
 Status StrAssign(SString&, char*);
 Status StrCopy(SString&, SString);
 bool StrEmpty(SString);
-int StrCompare(SString, SString); //>=<
+int StrCompare(SString s1, SString s2);
 int StrLength(SString);
 Status ClearString(SString&);
 Status Concat(SString&, SString, SString);
