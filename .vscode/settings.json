@@ -49,5 +49,6 @@
         "xtr1common": "cpp",
         "xutility": "cpp"
     },
-    "astyle.executable": "D:/Program Files/Dev-Cpp/AStyle/AStyle.exe"
+    "astyle.executable": "D:/Program Files/Dev-Cpp/AStyle/AStyle.exe",
+    "C_Cpp.formatting": "Disabled"
 }

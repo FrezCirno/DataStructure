@@ -5,9 +5,8 @@ Status StrAssign(HString& T, char* chars) {
 	if (T.ch)
 		free(T.ch);
 	int len = 0;
-	char* c;
-	for (c = chars; *c; ++len, ++c)
-		;
+	char* c = chars;
+	while(*c++) ++len;
 	if (!len) {
 		T.ch = NULL;
 		T.length = 0;
@@ -23,7 +22,11 @@ Status StrAssign(HString& T, char* chars) {
 } //StrAssign
 Status StrCopy(HString&, HString);
 Status StrEmpty(HString);
-int StrCompare(HString, HString); //>=<
+int StrCompare(HString str1, HString str2) {
+	//>=<
+    while(*str1.ch++ == *str2.ch++);
+    return *--str1.ch < *--str2.ch;
+} //StrCompare
 int StrLength(HString S) {
 	return S.length;
 } //StrLength

@@ -12,7 +12,7 @@ Status InitList(LinkList&);
 Status ListInsert(LinkList&, int, ElemType);
 Status ListDelete(LinkList&, int, ElemType&);
 Status GetElem(LinkList, int, ElemType&);
-Status CreateList /*Head Insert*/ (LinkList&, int);
+Status CreateList(LinkList&, int); /*Head Insert*/
 Status DestroyList(LinkList&);
 bool ListEmpty(LinkList);
 int ListLength(LinkList);
