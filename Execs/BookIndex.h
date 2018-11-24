@@ -14,7 +14,7 @@ typedef struct {
 	LinkList bnolist;
 } IdxTermType;
 typedef struct {
-	IdxTermType item[MAXKEYNUM + 1];//dont use 0
+	IdxTermType item[MAXKEYNUM + 1];//use 0
 	int last;
 } IdxListType;
 /*                      _________________________

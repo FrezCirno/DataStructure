@@ -20,7 +20,9 @@ int main() {
 
 
 void InitIdxList(IdxListType& idxlist) {
-	idxlist.item[0].keyword
+	char text[]="keyword index";
+	StrAssign(idxlist.item[0].keyword,text);
+	idxlist.item[0].bnolist=NULL;
 	idxlist.last = 0;
 }
 void GetLine(FILE f);
